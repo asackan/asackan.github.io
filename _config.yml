@@ -17,11 +17,10 @@ header:
     - name: Blog
 
 footer:
-  show_powered_by: true
+  show_powered_by: false
   contact:
-    - name: Email
-      value: yourmail@domain.com
-      link: mailto:yourmail@domain.com
+    - name: KimJuWon
+      value: krr751@kumoh.ac.kr
     - name: WeChat
       value: YourWeChatUsername
       link: "#"
@@ -34,7 +33,7 @@ footer:
     - name: LinkedIn
       link: http://linkedin.com/in/YourLinkedInUsername
     - name: GitHub
-      link: http://github.com/YourGitHubUsername
+      link: http://github.com/Asackan
     - name: Dribbble
       link: https://dribbble.com/YourDribbbleUsername
     - name: RSS
