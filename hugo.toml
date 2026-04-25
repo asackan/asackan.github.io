@@ -1,0 +1,8 @@
+baseURL = "https://asackan.github.io"
+title = "KAN Tech Blog"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowCodeCopyButtons = true
