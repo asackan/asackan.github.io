@@ -4,6 +4,9 @@ title = 'asackan'
 theme = 'PaperMod'
 defaultContentLanguage = 'ko'
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [languages]
   [languages.ko]
     languageName = '한국어'
@@ -13,8 +16,6 @@ defaultContentLanguage = 'ko'
     weight = 2
     title = 'asackan'
     [languages.en.params]
-      homeInfoParams.Title = 'asackan'
-      homeInfoParams.Content = 'A space to record and think'
 [pagination]
   pagerSize = 10
 
@@ -35,31 +36,18 @@ defaultContentLanguage = 'ko'
   hidemeta = false
   hideSummary = false
   comments = true
-
-[params.homeInfoParams]
-  Title = 'asackan'
-  Content = '기록하고 생각하는 공간'
+  disableSpecial1stPost = true
+  sidebar_bio = '기록하고 생각하는 공간'
+  # sidebar_avatar = '/images/avatar.jpg'
 
 [[params.socialIcons]]
   name = 'github'
   url = 'https://github.com/asackan'
 
-[menu]
-  [[menu.main]]
-    identifier = 'posts'
-    name = 'Posts'
-    url = '/posts/'
-    weight = 10
-  [[menu.main]]
-    identifier = 'tags'
-    name = 'Tags'
-    url = '/tags/'
-    weight = 20
-  [[menu.main]]
-    identifier = 'about'
-    name = 'About'
-    url = '/about/'
-    weight = 30
+# LinkedIn 추가 예시:
+# [[params.socialIcons]]
+#   name = 'linkedin'
+#   url = 'https://linkedin.com/in/yourprofile'
 
 [markup.goldmark.renderer]
   unsafe = true

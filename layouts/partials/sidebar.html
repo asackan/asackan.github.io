@@ -1,0 +1,151 @@
+<aside id="sidebar">
+  <div class="sidebar-inner">
+
+    {{- /* Profile */ -}}
+    <div class="sidebar-profile">
+      {{- if site.Params.sidebar_avatar }}
+      <img src="{{ site.Params.sidebar_avatar | absURL }}" alt="{{ site.Params.author }}" class="sidebar-avatar">
+      {{- else }}
+      <div class="sidebar-avatar-placeholder">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="var(--border)"/>
+          <circle cx="40" cy="32" r="14" fill="var(--secondary)"/>
+          <path d="M12 72c0-15.464 12.536-28 28-28s28 12.536 28 28" fill="var(--secondary)"/>
+        </svg>
+      </div>
+      {{- end }}
+      <h2 class="sidebar-name">
+        <a href="{{ "" | absLangURL }}">{{ site.Params.author | default site.Title }}</a>
+      </h2>
+      {{- if site.Params.sidebar_bio }}
+      <p class="sidebar-bio">{{ site.Params.sidebar_bio }}</p>
+      {{- end }}
+    </div>
+
+    {{- /* Social links */ -}}
+    {{- if site.Params.socialIcons }}
+    <div class="sidebar-social">
+      {{- range site.Params.socialIcons }}
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"
+         class="sidebar-social-link" aria-label="{{ .name }}">
+        {{- partial "svg.html" . -}}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    <hr class="sidebar-divider">
+
+    {{- /* Navigation */ -}}
+    <nav class="sidebar-nav">
+      <p class="sidebar-section-label">포스트</p>
+      <ul>
+        <li>
+          <a href="{{ "/posts/" | absLangURL }}"
+             class="{{ if hasPrefix .RelPermalink "/posts" }}active{{ end }}">
+            전체 글
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    {{- /* Search */ -}}
+    <div class="sidebar-search">
+      <p class="sidebar-section-label">검색</p>
+      <form action="{{ "/search/" | absLangURL }}" method="get" role="search">
+        <div class="sidebar-search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" name="q" placeholder="검색..."
+                 class="sidebar-search-input" autocomplete="off">
+        </div>
+      </form>
+    </div>
+
+    {{- /* Recent posts */ -}}
+    {{- $posts := where site.RegularPages "Type" "posts" }}
+    {{- if $posts }}
+    <div class="sidebar-recent">
+      <p class="sidebar-section-label">최신 글</p>
+      <ul>
+        {{- range first 5 $posts }}
+        <li>
+          <a href="{{ .Permalink }}"
+             class="{{ if eq $.Permalink .Permalink }}active{{ end }}"
+             title="{{ .Title }}">
+            {{- .Title -}}
+          </a>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+
+    <div class="sidebar-spacer"></div>
+
+    {{- /* Controls: theme toggle + lang switch */ -}}
+    <div class="sidebar-controls">
+      {{- if not site.Params.disableThemeToggle }}
+      <button id="theme-toggle" class="theme-toggle" accesskey="t"
+              title="테마 전환 (Alt + T)" aria-label="Toggle theme">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      {{- end }}
+
+      {{- if not site.Params.disableLangToggle }}
+      {{- $lang := .Lang }}
+      {{- with site.Home.Translations }}
+      <ul class="lang-menu">
+        {{- range . }}
+        {{- if ne $lang .Lang }}
+        <li>
+          <a href="{{ .Permalink }}"
+             aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
+            {{- if (and site.Params.displayFullLangName (.Language.LanguageName)) }}
+            {{- .Language.LanguageName | emojify -}}
+            {{- else }}
+            {{- .Lang | title -}}
+            {{- end -}}
+          </a>
+        </li>
+        {{- end }}
+        {{- end }}
+      </ul>
+      {{- end }}
+      {{- end }}
+    </div>
+
+  </div>
+</aside>
+
+<button class="sidebar-toggle" id="sidebar-toggle" aria-label="사이드바 열기/닫기">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>

@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="{{ "/css/custom.css" | absURL }}">
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Pre-fill search input from ?q= URL parameter
+  var params = new URLSearchParams(window.location.search);
+  var q = params.get('q');
+  if (q) {
+    var tryFill = setInterval(function () {
+      var input = document.getElementById('searchInput');
+      if (input) {
+        clearInterval(tryFill);
+        input.value = q;
+        input.dispatchEvent(new Event('input'));
+      }
+    }, 50);
+  }
+
+  // Mobile sidebar toggle
+  var toggle = document.getElementById('sidebar-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
+  if (toggle && sidebar && overlay) {
+    toggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    overlay.addEventListener('click', function () {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  }
+});
+</script>
