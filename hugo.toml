@@ -1,0 +1,54 @@
+baseURL = 'https://asackan.github.io/'
+languageCode = 'ko-kr'
+title = 'asackan'
+theme = 'PaperMod'
+paginate = 10
+
+[params]
+  env = 'production'
+  author = 'asackan'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = false
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  showtoc = true
+  tocopen = false
+  hidemeta = false
+  hideSummary = false
+  comments = false
+
+[params.homeInfoParams]
+  Title = 'asackan'
+  Content = '기록하고 생각하는 공간'
+
+[[params.socialIcons]]
+  name = 'github'
+  url = 'https://github.com/asackan'
+
+[menu]
+  [[menu.main]]
+    identifier = 'posts'
+    name = 'Posts'
+    url = '/posts/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'tags'
+    name = 'Tags'
+    url = '/tags/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 30
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.highlight]
+  noClasses = false
