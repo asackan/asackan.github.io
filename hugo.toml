@@ -34,7 +34,7 @@ defaultContentLanguage = 'ko'
   tocopen = false
   hidemeta = false
   hideSummary = false
-  comments = false
+  comments = true
 
 [params.homeInfoParams]
   Title = 'asackan'
